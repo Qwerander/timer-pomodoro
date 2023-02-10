@@ -1,0 +1,23 @@
+.top {
+    padding: 19px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: var(--silver);
+}
+
+.taskName {
+    margin: 0;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--white);
+}
+
+.taskNumber {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--white);
+}

@@ -1,0 +1,40 @@
+.menu {
+    position: absolute;
+    padding: 6px 0;
+    border: 1px solid var(--silver);
+    list-style: none;
+    background-color: var(--white);
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--dark-grey);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.item:hover {
+    background-color: var(--light-grey);
+}
+
+.menu::before {
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 15px;
+    top: 0;
+    left: 50%;
+    background-color: var(--white);
+    border-top: inherit;
+    border-left: inherit;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.item svg {
+    margin-right: 9px;
+}

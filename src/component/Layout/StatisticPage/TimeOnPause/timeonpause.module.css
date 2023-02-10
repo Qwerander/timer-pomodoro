@@ -1,0 +1,32 @@
+.pause {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+    width: calc((100% - 64px) / 3);
+    background-color: var(--light-grey);
+}
+
+.title {
+    margin: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--black);
+}
+
+.pauseTime {
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 76px;
+    color: var(--black);
+}
+
+.pause svg {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+}

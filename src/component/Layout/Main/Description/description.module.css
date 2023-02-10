@@ -1,0 +1,40 @@
+.wrapper {
+    margin-bottom: 25px;
+}
+
+.title {
+    margin: 0;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--black)
+}
+
+.list {
+    margin: 0;
+    padding: 0;
+    padding-left: 15px;
+    list-style: none; 
+}
+
+.item {
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 33px;
+    color: var(--black)    
+}
+
+.item:last-child {
+    margin: 0;
+}
+
+.list .item::before {
+    content: "\2022";
+    color: var(--red);
+    font-weight: bold;
+    display: inline-block; 
+    width: 2em;
+    margin-left: -1em;
+  }

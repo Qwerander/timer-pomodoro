@@ -1,0 +1,52 @@
+.wrapper {
+    padding: 70px 177px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--light-grey);
+}
+
+.task {
+    margin-bottom: 32px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+}
+
+.taskNumber {
+    margin-right: 10px; 
+    color: var(--dark-grey);
+}
+
+.taskValue {
+    color: var(--black);
+}
+
+.btnStart {
+    padding: 19px 50px;
+    margin-right: 25px;
+    border: none;
+    background-color: var(--green);
+    color: var(--white);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btnStart:focus,
+.btnStart:hover,
+.btnStart:active {
+    background-color: var(--dark-green);
+}
+
+.btnStop {
+    padding: 17px 46px;
+    border: 2px solid var(--silver);
+    background-color: transparent;
+    color: var(--silver);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btnStop:focus,
+.btnStop:hover,
+.btnStop:active {
+    background-color: var(--dark-green);
+}

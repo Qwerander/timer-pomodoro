@@ -1,0 +1,45 @@
+.header {
+    padding: 15px 80px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0px 10px 63px rgba(0, 0, 0, 0.07);
+}
+
+.headerLeft {
+    margin-right: auto;
+}
+
+.logo {
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.stat {
+    display: inline-block;
+    margin-right: 9px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 24px;
+    color: var(--red);
+}
+.statLink {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--red);
+}
+
+.link svg,
+.statLink svg {
+    margin-right: 13px;
+}
+
