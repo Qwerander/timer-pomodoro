@@ -5,6 +5,7 @@ import { Menu } from './Menu';
 import ReactDOM from 'react-dom';
 import { useAppDispatch } from '../../../../../store/hooks';
 import { editTask } from '../../../../../store/reducers/taskSlice';
+import { ModalDelete } from '../../ModalDelete';
 
 export type PositionType = {
   top?: number
@@ -14,6 +15,7 @@ export type PositionType = {
 
 export function TaskItem({ name, count, id }: { name: string, count: number, id: string }) {
   const [isMenuOpen, SetIsMenuOpen] = useState(false)
+  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false)
   const [isEditFormOpen, SetIsEditFormOpen] = useState(false)
   const [nameTask, SetNameTask] = useState(name)
   const ref = useRef<HTMLButtonElement>(null);
@@ -26,7 +28,7 @@ export function TaskItem({ name, count, id }: { name: string, count: number, id:
   const rect = ref.current?.getBoundingClientRect()
   if (rect) {
     // eslint-disable-next-line no-restricted-globals
-    position = { top: rect.y + scrollY + 5, left: rect.left + 12, transform: 'translateX(-50%)' } as PositionType 
+    position = { top: rect.y + scrollY + 24, left: rect.left + 18, transform: 'translateX(-50%)' } as PositionType 
   }
 
 
@@ -74,7 +76,13 @@ export function TaskItem({ name, count, id }: { name: string, count: number, id:
             id={id}
             setIsEditFormOpen={handleOpen}
             count={count}
+            setIsModalDeleteOpen={setIsModalDeleteOpen}
           />
+        ), node)
+      }
+      {isModalDeleteOpen &&
+        ReactDOM.createPortal((
+          <ModalDelete  setIsModalDeleteOpen={setIsModalDeleteOpen} id={id} />
         ), node)
       }
       {isEditFormOpen && (

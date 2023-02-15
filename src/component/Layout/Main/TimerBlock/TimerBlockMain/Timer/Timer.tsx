@@ -1,73 +1,77 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './timer.module.css';
 import { useInterval } from '../../../../../../hooks/useInterval';
 import { ReactComponent as PlusSvg } from '../../../../../../assets/img/plus.svg';
 import { useAppDispatch, useAppSelector } from '../../../../../../store/hooks';
-import { decrementCountPlan } from '../../../../../../store/reducers/taskSlice';
+import { decrementCountPlan, incrementCountPlan } from '../../../../../../store/reducers/taskSlice';
 import { incrementCycleCount, setModeBreake, setModeWork } from '../../../../../../store/reducers/timerSlice';
 
-export const getTodayAbsoluteTime = (): number => {
-  const now = new Date()
-  now.setHours(0)
-  now.setMinutes(0)
-  now.setSeconds(0)
-  now.setMilliseconds(0)
-  return now.getTime()
-}
+
+type Callback = (value: number) => number
 
 type PropsType = {
   id: string
   isStarted: boolean
+  isPause: boolean
   stop: () => void
+  setWorkTime: (fn: Callback) => void
   timer: {
     min: number
     sec: number
-    setMin: (min: number) => void
-    setSec: (sec: number) => void
+    setMin: (fn: Callback) => void
+    setSec: (fn: Callback) => void
   }
 }
 
-export function Timer({ id, isStarted, stop, timer }: PropsType) {
+export function Timer({ id, isStarted, isPause, stop, setWorkTime, timer }: PropsType) {
+  const { timeOnePomodor, timeShortBreak, timeLongBreak } =
+    useAppSelector(state => state.config)
+
   const { min, sec, setMin, setSec } = timer
-  
+
   const dispatch = useAppDispatch()
   const { mode, cycleCount } = useAppSelector(state => state.timer)
 
-
-  useEffect(() => {
-    if (mode !== 'work')
-    dispatch(setModeWork())
-  }, [])
+  const handleClick = () => {
+    dispatch(incrementCountPlan({ id }))
+  }
 
   useInterval(() => {
     if (isStarted) {
-      setSec(sec - 1)
+      setSec((prev) => prev - 1)
+      setWorkTime((prev) => prev + 1)
       if (timer.sec === 0) {
-        setMin(min - 1)
-        setSec(59)
+        setMin((prev) => prev - 1)
+        setSec(() => 59)
       }
       if (min === 0 && sec === 0) {
         stop()
         if (mode === 'work') {
           dispatch(setModeBreake())
-          dispatch(decrementCountPlan({id}))
-          cycleCount % 4 === 0 
-            ? setMin(2)
-            : setMin(1)
+          dispatch(decrementCountPlan({ id }))
+          cycleCount % 4 === 0 && cycleCount !== 0
+            ? setMin(() => timeLongBreak)
+            : setMin(() => timeShortBreak)
         } else {
           dispatch(setModeWork())
           dispatch(incrementCycleCount())
-          setMin(3)
-        } 
-        setSec(0)
+          setMin(() => timeOnePomodor)
+        }
+        setSec(() => 0)
       }
     }
   }, [1000])
 
   return (
-    <div className={styles.timer}>
-      {min}:{String(sec).length === 1 ? '0' + sec : sec}
-      <button className={styles.btnPlus}>
+    <div
+      className={isStarted || isPause ? mode === 'work'
+        ? `${styles.timer} ${styles.timerWork}`
+        : `${styles.timer} ${styles.timerBreake}`
+        : styles.timer}
+    >
+      {String(min).length === 1 ? '0' + min : min}:
+      {String(sec).length === 1 ? '0' + sec : sec}
+      <button className={styles.btnPlus} onClick={handleClick}>
         <PlusSvg />
       </button>
     </div>

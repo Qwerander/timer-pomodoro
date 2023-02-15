@@ -14,7 +14,7 @@
 }
 
 .taskNumber {
-    margin-right: 10px; 
+    margin-right: 10px;
     color: var(--dark-grey);
 }
 
@@ -29,9 +29,9 @@
     background-color: var(--green);
     color: var(--white);
     transition: background-color 0.3s ease-in-out;
+    outline: none;
 }
 
-.btnStart:focus,
 .btnStart:hover,
 .btnStart:active {
     background-color: var(--dark-green);
@@ -42,11 +42,21 @@
     border: 2px solid var(--silver);
     background-color: transparent;
     color: var(--silver);
-    transition: background-color 0.3s ease-in-out;
+    outline: none;
 }
 
-.btnStop:focus,
-.btnStop:hover,
-.btnStop:active {
-    background-color: var(--dark-green);
+.btnStopActiveTimer {
+    padding: 17px 46px;
+    border: 2px solid var(--red);
+    background-color: transparent;
+    color: var(--red);
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    outline: none;
+
+}
+
+.btnStopActiveTimer:hover,
+.btnStopActiveTimer:active {
+    background-color: var(--red);
+    color: var(--white);
 }

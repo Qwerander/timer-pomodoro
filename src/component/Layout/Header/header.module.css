@@ -4,7 +4,7 @@
     align-items: center;
     width: 100%;
     background-color: var(--white);
-    box-shadow: 0px 10px 63px rgba(0, 0, 0, 0.07);
+    box-shadow: var(--shadow)
 }
 
 .headerLeft {
@@ -28,7 +28,10 @@
     font-size: 24px;
     line-height: 24px;
     color: var(--red);
+    transition: color 0.3s ease-in-out;
+    outline: none;
 }
+
 .statLink {
     display: flex;
     align-items: center;
@@ -36,6 +39,15 @@
     font-size: 16px;
     line-height: 17px;
     color: var(--red);
+    transition: color 0.3s ease-in-out;
+    outline: none;
+}
+
+.statLink:focus,
+.statLink:hover,
+.link:focus,
+.link:hover {
+  color: var(--rose);
 }
 
 .link svg,
@@ -43,3 +55,78 @@
     margin-right: 13px;
 }
 
+.headerRight {
+    display: flex;
+    gap: 12px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--green);
+  -webkit-transition: .3s;
+  transition: .3s ease-in-out;
+}
+
+.slider:focus,
+.slider:hover {
+    background-color: var(--dark-green);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--white);
+  -webkit-transition: .3s;
+  transition: .3s ease-in;
+}
+
+input:checked + .slider {
+  background-color: var(--green);
+  transition: .3s ease-in-out;
+}
+
+input:checked:hover + .slider {
+  background-color: var(--dark-green);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.img {
+  width: 35px;
+  height: 35px;
+}
+
+.themeSwicher {
+  display: flex;
+  gap: 10px;
+}

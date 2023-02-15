@@ -1,12 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'; //createAsyncThunk
-
-
-
-export type StatisticListType = {
-    [days: number]: StatisticDayType
-}
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import moment from "moment";
 
 export type StatisticDayType = {
+    date: string,
     time: number,
     count: number,
     paused: number,
@@ -14,62 +10,57 @@ export type StatisticDayType = {
 }
 
 export type StatisticStateType = {
-    days: StatisticListType 
-    selectedDay: keyof StatisticStateType['days'] | 0
-    lastDay: keyof StatisticStateType['days'] | 0
+    days: Array<StatisticDayType>
+    lastDay: string
 }
 
 const initialState: StatisticStateType = {
-    days: {},
-    selectedDay: 0,
-    lastDay: 0,
+    days: [],
+    // selectedDay: 0,
+    lastDay: '',
 };
+
+export const currentDate = moment().format('YYYY-MM-DD');
 
 export const statisticSlice = createSlice({
     name: 'statistic',
     initialState,
-
+    
     reducers: {
-        addNewDay: (state, action: PayloadAction<{newDay: number}> ) => {
-            state.days[action.payload.newDay] = {
-                count: 0,
-                paused: 0,
-                stops: 0,
-                time: 0,
+        addNewDay: (state) => {
+            const statDay = state.days.find(day => day.date === currentDate);
+            if (statDay?.date !== currentDate) {
+                state.days.push({
+                        date: currentDate,
+                        count: 0,
+                        paused: 0,
+                        stops: 0,
+                        time: 0,
+                    })
             }
-            state.lastDay = action.payload.newDay
-            state.selectedDay = action.payload.newDay
+            state.lastDay = currentDate
         },
-        addTime: (state, action: PayloadAction<{currentDay: number, time: number}> ) => {
-            state.days[action.payload.currentDay].time = 
-                state.days[action.payload.currentDay].time + 
-                    action.payload.time
+        addTime: (state, action: PayloadAction<{time: number}>) => {    
+            state.days[state.days.length - 1].time =
+              state.days[state.days.length - 1].time + action.payload.time;
+            
         },
-        addStops: (state, action: PayloadAction<{currentDay: number, stops: number}>) => {
-            state.days[action.payload.currentDay].stops = 
-                state.days[action.payload.currentDay].stops + action.payload.stops
+        addStops: (state, action: PayloadAction<{stops: number}>) => {
+            state.days[state.days.length - 1].stops = 
+                state.days[state.days.length - 1].stops + action.payload.stops
         },
-        addPause: (state, action: PayloadAction<{currentDay: number, pause: number}>) => {
-            state.days[action.payload.currentDay].paused = 
-                state.days[action.payload.currentDay].paused + action.payload.pause
+        addPause: (state, action: PayloadAction<{pause: number}>) => {
+            state.days[state.days.length - 1].paused = 
+                state.days[state.days.length - 1].paused + action.payload.pause
         },
-        addPomodor: (state, action: PayloadAction<{currentDay: number}>) => {
-            state.days[action.payload.currentDay].count = 
-                state.days[action.payload.currentDay].count + 1
+        addPomodor: (state) => {
+            state.days[state.days.length - 1].count = 
+                state.days[state.days.length - 1].count + 1
         },
-        setSelectedDay: (state, action: PayloadAction<{day: number}>) => {
-            state.selectedDay = action.payload.day
-        }
+   
     }
 });
 
-export const { addNewDay, addTime, addPause, addStops, addPomodor, setSelectedDay } = statisticSlice.actions;
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-
-// export const selectTask = (state: RootState) => state.tasksReducer.tasks;
-
+export const { addNewDay, addTime, addPause, addStops, addPomodor } = statisticSlice.actions;
 
 export default statisticSlice.reducer;

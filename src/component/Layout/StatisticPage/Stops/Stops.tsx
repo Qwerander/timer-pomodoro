@@ -4,14 +4,15 @@ import { ReactComponent as StopSvg } from '../../../../assets/img/stop.svg';
 
 export function Stops({stops}: {stops: number}) {
   return (
-    <div className={styles.stop}>
+    <div className={styles.stop}
+    style={{backgroundColor: stops ? 'var(--azure)' : ' var(--light-grey)'}}>
       <h3 className={styles.title}>
         Остановки
       </h3>
       <span className={styles.stopCount}>
-        {stops ? stops : 0}
+        {stops}
       </span>
-      <StopSvg />
+      <StopSvg style={{stroke: stops ? 'var(--aqua)' : ' var(--silver)'}}/>
     </div>
   );
 }

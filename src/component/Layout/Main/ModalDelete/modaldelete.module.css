@@ -1,0 +1,116 @@
+.modal {
+    position: fixed;
+    padding: 15px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .7);
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+.container {
+    padding: 22px;
+    max-width: 350px;
+    min-height: 175px;
+    border-radius: 10px;
+    background-color: var(--white);
+    position: relative;
+    margin: 300px auto 0;
+    cursor: default;
+    z-index: 10000;
+    box-shadow: var(--shadow);
+}
+
+.content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    min-height: 100%;
+    margin: auto 0;
+}
+
+.btnClose {
+    position: absolute;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.btnClose::before {
+    position: absolute;
+    content: "";
+    width: 22px;
+    height: 0;
+    top: 47%;
+    transform: translateX(-50%) rotate(45deg);
+    border-bottom: 3px solid var(--silver);
+}
+
+.btnClose::after {
+    position: absolute;
+    content: "";
+    width: 22px;
+    height: 0;
+    top: 47%;
+    transform: translateX(-50%) rotate(-45deg);
+    border-bottom: 3px solid var(--silver);
+}
+
+.title {
+    margin: 0;
+    margin-bottom: 25px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 17px;
+    color: var(--black);
+
+}
+
+.btnConfirum {
+    margin-bottom: 10px;
+    padding: 15px 50px;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 17px;
+    text-align: center;
+    background-color: var(--red);
+    color: var(--white);
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.btnConfirum:hover {
+    background-color: var(--dark-red);
+}
+
+.btnCancel {
+    padding: 0;
+    border: none;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 17px;
+    text-decoration: underline;
+    background-color: transparent;
+    color: var(--black);
+    outline: none;
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.btnCancel:hover {
+    color: var(--silver);
+}

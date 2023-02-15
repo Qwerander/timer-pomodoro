@@ -5,7 +5,7 @@ import { ReactComponent as MenuMinusSvg } from '../../../../../../assets/img/men
 import { ReactComponent as MenuEditSvg } from '../../../../../../assets/img/menuEdit.svg'
 import { ReactComponent as MenuDeleteSvg } from '../../../../../../assets/img/menuDelete.svg'
 import { useAppDispatch } from '../../../../../../store/hooks';
-import { decrementCountPlan, deleteTask, incrementCountPlan } from '../../../../../../store/reducers/taskSlice';
+import { decrementCountPlan, incrementCountPlan } from '../../../../../../store/reducers/taskSlice';
 import { PositionType } from '../TaskItem';
 
 type Props = {
@@ -14,43 +14,47 @@ type Props = {
   count: number
   closeMenu: (value: boolean) => void
   setIsEditFormOpen: (value: boolean) => void
+  setIsModalDeleteOpen: (value: boolean) => void
 }
 
-export function Menu({style, closeMenu, id, count, setIsEditFormOpen}: Props) {
+export function Menu({ style, closeMenu, id, count, setIsEditFormOpen, setIsModalDeleteOpen }: Props) {
   const dispatch = useAppDispatch()
+  
 
   const increment = () => {
-    dispatch(incrementCountPlan({id}))
-  } 
+    dispatch(incrementCountPlan({ id }))
+  }
 
   const decrement = () => {
-    if (count > 1){
-      dispatch(decrementCountPlan({id}))
-    }  
-  } 
+    if (count > 1) {
+      dispatch(decrementCountPlan({ id }))
+    }
+  }
 
   const deleteCurrentTask = () => {
-    dispatch(deleteTask({id}))
-  } 
+    setIsModalDeleteOpen(true)
+  }
 
   const editCurrentTask = () => {
     setIsEditFormOpen(true)
-  } 
+  }
 
   return (
-    <ul className={styles.menu} style={style} onMouseLeave={() => closeMenu(false)}>
-      <li className={styles.item} onClick={increment}>
-        <MenuPlusSvg /> Увеличить
-      </li>
-      <li className={styles.item} onClick={decrement}>
-        <MenuMinusSvg /> Уменьшить
-      </li>
-      <li className={styles.item} onClick={editCurrentTask}>
-        <MenuEditSvg /> Редактировать
-      </li>
-      <li className={styles.item} onClick={deleteCurrentTask}>
-        <MenuDeleteSvg /> Удалить
-      </li>
-    </ul>
+    
+      <ul className={styles.menu} style={style} onMouseLeave={() => closeMenu(false)}>
+        <li className={styles.item} onClick={increment}>
+          <MenuPlusSvg /> Увеличить
+        </li>
+        <li className={styles.item} onClick={decrement}>
+          <MenuMinusSvg /> Уменьшить
+        </li>
+        <li className={styles.item} onClick={editCurrentTask}>
+          <MenuEditSvg /> Редактировать
+        </li>
+        <li className={styles.item} onClick={deleteCurrentTask}>
+          <MenuDeleteSvg /> Удалить
+        </li>
+      </ul>
+ 
   );
 }

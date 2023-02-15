@@ -35,6 +35,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--light-grey);
+    min-height: 216px;
 
 }
 
@@ -43,6 +44,13 @@
     align-items: center;
     justify-content: center;
     gap: 10px
+}
+
+.leftBottomWrapper span {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--dark-grey);
 }
 
 .tomatoCount {
@@ -55,4 +63,15 @@
     text-align: center;
     color: var(--white);
     background-color: var(--red);
+}
+
+.workTime {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--black);
+}
+
+.workTime span {
+    color: var(--red);
 }

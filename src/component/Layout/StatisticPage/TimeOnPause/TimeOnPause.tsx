@@ -4,16 +4,17 @@ import { ReactComponent as PauseSvg } from '../../../../assets/img/pause.svg';
 
 export function TimeOnPause({pause}: {pause: number}) {
 
-  const min = Math.round(pause / 1000 / 60)
+
   return (
-    <div className={styles.pause}>
+    <div className={styles.pause}
+    style={{backgroundColor: pause ? 'var(--sky)' : ' var(--light-grey)'}}>
     <h3 className={styles.title}>
     Время на паузе
     </h3>
     <span className={styles.pauseTime}>
-      {min}м
+      {pause} c
     </span>
-    <PauseSvg />
+    <PauseSvg  style={{stroke:  pause ? 'var(--violet)' : ' var(--silver)'}}/>
   </div>
   );
 }

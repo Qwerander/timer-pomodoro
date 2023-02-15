@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './statisticpageright.module.css';
-import { StatisticListType } from '../../../../store/reducers/statisticSlice';
 import { useAppSelector } from '../../../../store/hooks';
+import moment from 'moment';
+import { ChartMode } from '../StatisticPageTop';
+import { secToTime } from '../StatisticPageLeft';
 
 
 interface IsplitMs {
@@ -21,118 +23,120 @@ export const splitMs = (ms: number): IsplitMs => {
   return { days, hours, minutes, seconds: sec }
 }
 
+type PropsType = {
+  selectedDate: string
+  selectedChartMode: ChartMode,
+  selectDate: (date: string) => void
+}
 
-export function StatisticPageRight({statistic}: {statistic: StatisticListType}) {
+type WeekDayType = {
+  date: string,
+  name: string,
+  active: boolean,
+  workSec: number
+}
 
-  const SUTKI = 86400000
 
-  const selectedDay = useAppSelector(state => state.statistic.selectedDay)
-  const lastDay = useAppSelector(state => state.statistic.lastDay)
-  const lastDayOfCurrentWeek = new Date(lastDay).getDay()
-  const week: number[] = [] 
-  for (let i = 0; i < lastDayOfCurrentWeek; i++) {
-    week.push(lastDay - SUTKI * i)
-  }
-  console.log(week);
-  
-  const days = Object.entries(statistic)
+export function StatisticPageRight({ selectedDate, selectDate, selectedChartMode }: PropsType) {
 
-  const arr = days.map(item => {
-   
-   return item[1].count
-  })
-
-  const max = Math.max.apply(null, arr)
-
-  
   const MAX_HEIGHT = 400
 
-  const dayValue = {
-    monday: Math.round(arr[0] * MAX_HEIGHT / max),
-    tuesday: Math.round(arr[1] * MAX_HEIGHT / max),
-    wednesday: Math.round(arr[2] * MAX_HEIGHT / max),
-    thursday: Math.round(arr[3] * MAX_HEIGHT / max),
-    friday: Math.round(arr[4] * MAX_HEIGHT / max),
-    saturday: Math.round(arr[5] * MAX_HEIGHT / max),
-    sunday: Math.round(arr[6] * MAX_HEIGHT / max),
-  }
-  const color = 'var(--rose)'
+  const statistic = useAppSelector(state => state.statistic.days)
+  const [week, setWeek] = useState<Array<WeekDayType>>([])
+  const [subtractDays, setSubtractDays] = useState(0)
+  const [maxWorkSec, setMaxWorkSec] = useState(0)
 
-  console.log(dayValue);
-  
+  useEffect(() => {
 
-  const handleClick = (day: number) => {
-    
-    console.log(day)
+    switch (selectedChartMode) {
+      case ChartMode.CurrentWeek:
+        setSubtractDays(0)
+        break;
+      case ChartMode.LastWeek:
+        setSubtractDays(7)
+        break;
+      case ChartMode.TwoWeeksAgo:
+        setSubtractDays(14);
+        break;
+    }
+  }, [selectedChartMode])
+
+
+  useEffect(() => {
+    setWeek([])
+    for (let dayNumber = 0; dayNumber < 7; dayNumber++) {
+      let weekDayDate = moment().subtract(subtractDays, 'days').weekday(dayNumber).format('YYYY-MM-DD');
+      let weekDayName = moment().subtract(subtractDays, 'days').weekday(dayNumber).format('ddd');
+
+      //Ищем день в статистике по дате
+      let foundStatItem = statistic.find(item => item.date === weekDayDate);
+
+      setWeek(prev => prev.concat({
+        date: weekDayDate,
+        name: weekDayName,
+        active: selectedDate === weekDayDate,
+        workSec: foundStatItem ? foundStatItem.time : 0
+      }))
+    }
+
+  }, [selectedDate, statistic, subtractDays]);
+
+  useEffect(() => {
+    const workSecArray = week.map(day => day.workSec)
+    const maxValue = Math.max.apply(null, workSecArray)
+    setMaxWorkSec(maxValue ? maxValue : 1)
+  }, [week])
+
+  const handleClick = (e: any) => {
+    selectDate(e.target.dataset.day)
   }
 
   return (
     <div className={styles.right}>
       <div className={styles.chart}>
+        <span className={styles.graphValue}>
+          <span>{maxWorkSec ? secToTime(Math.round(maxWorkSec)) : '4 минуты'} </span>
+        </span>
+        <span className={styles.graphValue}>
+          <span>{maxWorkSec ? secToTime(Math.round(3 / 4 * maxWorkSec)) : '3 минуты'} </span>
+        </span>
+        <span className={styles.graphValue}>
+          <span>{maxWorkSec ? secToTime(Math.round(2 / 4 * maxWorkSec)) : '2 минут'} </span>
+        </span>
+        <span className={styles.graphValue}>
+          <span>{maxWorkSec ? secToTime(Math.round(1 / 4 * maxWorkSec)) : '1 минут'} </span>
+        </span>
         <div className={styles.dayOfWeek}>
-          <div className={styles.day} onClick={() => handleClick(1)}>
-            Пн
-            <span className={styles.column}
-              style={{
-                height: dayValue.monday,
-                backgroundColor: `${color}`
-              }}>
-            </span>
-          </div>
-          <div className={styles.day} onClick={() => handleClick(2)}>
-            Вт
-            <span className={styles.column}
-              style={{
-                height: dayValue.tuesday,
-                backgroundColor: `${color}`
-              }}>
-            </span>
-          </div>
-          <div className={styles.day} onClick={() => handleClick(3)}>
-            Ср
-            <span className={styles.column}
-              style={{
-                height: dayValue.wednesday,
-                backgroundColor: `${color}`
-              }}>
-            </span>
-          </div>
-          <div className={styles.day} onClick={() => handleClick(4)}>
-            Чт
-            <span className={styles.column} 
-              style={{
-                backgroundColor: `${color}`,
-                height: dayValue.thursday,
-              }}>
-            </span>
-          </div>
-          <div className={styles.day} onClick={() => handleClick(5)}>
-            Пт
-            <span className={styles.column}
-              style={{
-                height: dayValue.friday,
-                backgroundColor: `${color}`
-              }}>
-            </span>
-          </div>
-          <div className={styles.day} onClick={() => handleClick(6)}>
-            Сб
-            <span className={styles.column}
-              style={{
-                height: dayValue.saturday,
-                backgroundColor: `${color}`
-              }} >
-            </span>
-          </div>
-          <div className={styles.day} onClick={() => handleClick(7)}>
-            Вс
-            <span className={styles.column}
-              style={{
-                height: dayValue.sunday,
-                backgroundColor: `${color}`
-              }}>
-            </span>
-          </div>
+
+          {week && week.map(day => {
+
+            return (
+              <div
+                key={day.name}
+                className={day.active 
+                  ? `${styles.day} ${styles.dayActive}` : styles.day}
+                data-day={day.date}
+                onClick={handleClick}
+              >
+                {day.name[0].toUpperCase() + day.name.slice(1)}
+                <span className={styles.column}
+                  data-day={day.date}
+                  style={{
+                    height: isNaN(day.workSec) || day.workSec === 0
+                      ? 5
+                      : Math.round(day.workSec * MAX_HEIGHT / maxWorkSec) - 10,
+                    backgroundColor:
+                      !isNaN(day.workSec) && !(day.workSec > 0)
+                        ? 'var(--silver)'
+                        : day.active
+                          ? `var(--red)`
+                          : `var(--rose)`
+                  }}
+                >
+                </span>
+              </div>
+            )
+          })}
         </div>
       </div>
     </div>

@@ -20,10 +20,16 @@
     font-size: 16px;
     line-height: 17px;
     color: var(--black);
+    transition: background-color 0.3s ease-in-out;
 }
 
 .input::placeholder {
     color: var(--dark-grey)
+}
+
+.input:hover,
+.input:focus {
+    background-color: var(--medium-grey);
 }
 
 .btn {
@@ -33,6 +39,7 @@
     background-color: var(--green);
     color: var(--white);
     transition: background-color 0.3s ease-in-out;
+    outline: none;
 }
 
 .btn:focus,

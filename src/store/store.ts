@@ -14,16 +14,18 @@ import storage from 'redux-persist/lib/storage';
 import tasks from './reducers/taskSlice';
 import statistic from './reducers/statisticSlice';
 import timer from './reducers/timerSlice';
+import config from './reducers/configSlice';
 
 const persistConfig = {
-  key: 'root',
+  key: 'pomodor',
   storage,
 }
 
 const rootReducer = combineReducers({
   tasks,
   statistic,
-  timer
+  timer,
+  config
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -50,4 +52,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >;
 
-store.subscribe(() => console.info(store.getState())) // Для отладки 

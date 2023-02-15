@@ -12,7 +12,9 @@ export function AddTaskForm() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    dispatch(addTask({name}))
+    if (name && name !== '') {
+      dispatch(addTask({name}))
+    }
     setName('')   
   }
 

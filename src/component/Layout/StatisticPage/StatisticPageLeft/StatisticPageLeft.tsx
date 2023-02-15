@@ -1,51 +1,60 @@
 import React from 'react';
 import styles from './statisticpageleft.module.css';
 import { ReactComponent as TomatoSvg } from '../../../../assets/img/tomato.svg'
-import { StatisticDayType } from '../../../../store/reducers/statisticSlice';
+import { ReactComponent as Tomato2Svg } from '../../../../assets/img/tomato2.svg'
+import moment from 'moment';
+import 'moment/locale/ru';
+
+moment.locale('ru')
 
 type PropsType = {
-  dayOfWeek: number
-  time: number
-  count: number
+  statDayDate: string
+  statDayTime: number
+  statDayCount: number
 }
 
-enum DayOfWeek {
-  'Воскресенье',
-  'Понедельник',
-  'Вторник',
-  'Среда',
-  'Четверг',
-  'Пятница',
-  'Суббота',
+export function secToTime(sec: number) {
+  let hh = Math.floor(sec / 60 / 60);
+  let mm = Math.floor((sec - hh * 3600) / 60);
+  let ss = Math.floor(sec - hh * 3600 - mm * 60);
+  if (hh === 0) {
+    if (mm === 0) {
+      return `${ss} сек`
+    } else return `${mm} мин ${ss} сек`
+  } else return `${hh} ч ${mm} мин ${ss} сек`;
 }
 
-export function StatisticPageLeft({ dayOfWeek, time, count }: PropsType) {
+export function StatisticPageLeft({ statDayDate, statDayTime, statDayCount }: PropsType) {
 
-  const min = Math.round(time / 1000 / 60)
+  const dayOfWeek = moment(statDayDate).format('dddd')
 
   return (
     <div className={styles.left}>
       <div className={styles.leftTop}>
         <h3 className={styles.currentDay}>
-          {DayOfWeek[dayOfWeek]}
+          {dayOfWeek[0].toUpperCase() + dayOfWeek.slice(1)}
         </h3>
         <span className={styles.currentDayData}>
-          {time 
-          ? <span>Вы работали над задачами в течении <span>{ min }</span> минут</span>
-          : <span>Нет статистики</span>
-        }
+          {statDayTime > 0
+            ? <span className={styles.workTime}>Вы работали над задачами в течении
+              <span> {secToTime(statDayTime)}</span>
+            </span>
+            : <span>Нет статистики</span>
+          }
         </span>
       </div>
       <div className={styles.leftBottom}>
         <div className={styles.leftBottomWrapper}>
-          { count > 0 
-          ?<TomatoSvg />
-          :<TomatoSvg />     
+          {statDayCount > 0
+            ? <Tomato2Svg />
+            : <TomatoSvg />
           }
-          <span>x {count}</span>
+          <span>
+            {statDayCount ? 'x ' + statDayCount : null}
+          </span>
         </div>
         <span className={styles.tomatoCount}>
-          {count} помидор(-ов)
+          {statDayCount} помидор(-ов)
         </span>
       </div>
     </div>

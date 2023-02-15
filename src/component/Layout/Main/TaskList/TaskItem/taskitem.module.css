@@ -1,11 +1,10 @@
 .item {
     position: relative;
-    padding: 15px 0;
+    padding: 5px 0;
     display: flex;
     align-items: center;
     width: 72%;
     border-bottom: 2px solid var(--medium-grey);
-    /* justify-content: space-between; */
 }
 
 .count {
@@ -29,7 +28,8 @@
 
 .button {
     background-color: transparent;
-    padding: 0;
+    padding: 20px 5px;
+    border-radius: 100%;
     border: none;
     cursor: pointer;
     outline: none;

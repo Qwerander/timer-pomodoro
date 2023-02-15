@@ -18,7 +18,7 @@ img {
   max-width: 100%;
 }
 
-:root {
+:root[data-theme='light'] {
   --white: #fff;
   --black: #333;
   --green: #A8B64F;
@@ -37,6 +37,29 @@ img {
   --sky: #DFDCFE;
   --aqua: #7FC2D7;
   --azure: #C5F1FF;
+  --shadow: 0px 10px 63px rgba(0, 0, 0, 0.07);
+}
+
+:root[data-theme='dark'] {
+  --white: #000;
+  --black: #ccc;
+  --green: #5749b0;
+  --dark-green: #766bbe;
+  --rose: #157686;
+  --tomatoo: #118ca2;
+  --red: #118ca2;
+  --dark-red: #48d7f0;
+  --light-grey: #0b0b0b;
+  --medium-grey: #131313;
+  --silver: #3b3b3b;
+  --dark-grey: #666666;
+  --gold: #0051ca;
+  --yellow: #002256;
+  --violet: #636828;
+  --sky: #202301;
+  --aqua: #803d28;
+  --azure: #3a0e00;
+  --shadow: 0px 10px 63px rgba(255, 255, 255, 0.93);
 }
 
 @font-face {
@@ -90,6 +113,7 @@ body {
   font-family: 'SFUIDisplay', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--white);
 }
 
 
