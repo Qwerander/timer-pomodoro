@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+#Тайиер рпботы над задачами по методы "Помидор"
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Посмотреть на работу приложения можно здесь
+https://qwerander.github.io/timer-pomodoro/
 
 ## Available Scripts
 
