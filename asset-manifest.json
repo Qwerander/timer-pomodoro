@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/timer-pomodoro/static/css/main.ea139a75.css",
+    "main.js": "/timer-pomodoro/static/js/main.c9dceced.js",
+    "static/media/SFUIDisplay-Light.woff": "/timer-pomodoro/static/media/SFUIDisplay-Light.70cbf532b316a0425c0e.woff",
+    "static/media/SFUIDisplay-Thin.woff": "/timer-pomodoro/static/media/SFUIDisplay-Thin.f6a96ccdeb71e593f093.woff",
+    "static/media/SFUIDisplay-Medium.woff": "/timer-pomodoro/static/media/SFUIDisplay-Medium.691073e2b9ef80d5c702.woff",
+    "static/media/SFUIDisplay-Bold.woff": "/timer-pomodoro/static/media/SFUIDisplay-Bold.111df0192eebd73b0bdf.woff",
+    "static/media/SFUIDisplay-Regular.woff": "/timer-pomodoro/static/media/SFUIDisplay-Regular.1b6ee1f6f9e80f37ff4e.woff",
+    "static/media/SFUIDisplay-Thin.woff2": "/timer-pomodoro/static/media/SFUIDisplay-Thin.f3e3310d830ec276a9f9.woff2",
+    "static/media/SFUIDisplay-Light.woff2": "/timer-pomodoro/static/media/SFUIDisplay-Light.60241fa4b412694abb65.woff2",
+    "static/media/SFUIDisplay-Medium.woff2": "/timer-pomodoro/static/media/SFUIDisplay-Medium.90312d015521ff21cc61.woff2",
+    "static/media/SFUIDisplay-Bold.woff2": "/timer-pomodoro/static/media/SFUIDisplay-Bold.de06fd537f47d93309ef.woff2",
+    "static/media/SFUIDisplay-Regular.woff2": "/timer-pomodoro/static/media/SFUIDisplay-Regular.d5b1bd49ba459767871a.woff2",
+    "static/media/moon.png": "/timer-pomodoro/static/media/moon.ef62efd4f0a25c7ee18b.png",
+    "static/media/tomato.svg": "/timer-pomodoro/static/media/tomato.671bf7648b7ff5d941e3986eaba5040c.svg",
+    "static/media/logo.svg": "/timer-pomodoro/static/media/logo.b750a45ad0c0c2a32597b6563ac806b5.svg",
+    "static/media/tomato2.svg": "/timer-pomodoro/static/media/tomato2.dc02dc273f1b2c8d20270b2c5832603d.svg",
+    "static/media/config.svg": "/timer-pomodoro/static/media/config.94fe0eed325c9a0c81ce11de309bf0fe.svg",
+    "static/media/focus.svg": "/timer-pomodoro/static/media/focus.9e1fca5700aaf07f555b8eb90938968f.svg",
+    "index.html": "/timer-pomodoro/index.html",
+    "static/media/pause.svg": "/timer-pomodoro/static/media/pause.7a87304086a5fb31022f162b885ebb2f.svg",
+    "static/media/menuMinus.svg": "/timer-pomodoro/static/media/menuMinus.707ab0c5bc190970cbd7ff3d2c7e9c98.svg",
+    "static/media/stop.svg": "/timer-pomodoro/static/media/stop.21974dc03378422377586d09e59f6d7b.svg",
+    "static/media/menuEdit.svg": "/timer-pomodoro/static/media/menuEdit.0240c33e694d28bb2d53a51170587ed5.svg",
+    "static/media/menuPlus.svg": "/timer-pomodoro/static/media/menuPlus.7d8a35b8002784dbde0b38074b532c07.svg",
+    "static/media/menuDelete.svg": "/timer-pomodoro/static/media/menuDelete.ba1c50a6e6f46ae7bc893d4dfae187cc.svg",
+    "static/media/plus.svg": "/timer-pomodoro/static/media/plus.f6fe73a1bca0fbe2fbdeabf72b97014f.svg",
+    "static/media/menu.svg": "/timer-pomodoro/static/media/menu.6ba06fac80453ade68db0d7059978470.svg",
+    "static/media/statisticIcon.svg": "/timer-pomodoro/static/media/statisticIcon.053a4412e9109e6f8740b853665af3ca.svg",
+    "static/media/rect.svg": "/timer-pomodoro/static/media/rect.0f5de20c9eb4ebc76636a6b176ff53c1.svg",
+    "static/media/divider.svg": "/timer-pomodoro/static/media/divider.29938d36b46dc7d36ff5d0c83e142f45.svg",
+    "main.ea139a75.css.map": "/timer-pomodoro/static/css/main.ea139a75.css.map",
+    "main.c9dceced.js.map": "/timer-pomodoro/static/js/main.c9dceced.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea139a75.css",
+    "static/js/main.c9dceced.js"
+  ]
+}
