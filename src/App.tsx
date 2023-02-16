@@ -10,7 +10,7 @@ export function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Layout />
         </BrowserRouter>
       </PersistGate>
